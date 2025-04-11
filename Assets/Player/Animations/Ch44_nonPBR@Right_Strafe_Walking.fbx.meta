@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f153a470a028de444a71c3af3db94ed3
+guid: b731ad0dfc8c6464d8c3020499d86127
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,7 +31,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Happy_Walk_Backward
+      name: Right_Strafe_Walking
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0

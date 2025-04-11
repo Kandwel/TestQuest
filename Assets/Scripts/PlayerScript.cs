@@ -2,18 +2,22 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    public float speed = 2.5f;
-    public float mouseSensitivity = 100f;
+    public float speed = 2.5f; // скорость персонажа
+    public float mouseSensitivity = 100f; // чувствительность мыши
 
-    public Transform cameraTransform;
+    public Transform cameraTransform;  // позиция камеры
 
-    private Rigidbody rb;
-    private float xRotation = 0f;
+    private Rigidbody rb;  // определение физического тела
+    private float xRotation = 0f;  // поворот камеры вверх/вниз
+
+    public Animator anim;  // подключение аниматора
+
+    bool bonus = false;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
+        rb = GetComponent<Rigidbody>();  // получение данных физического тела
+        Cursor.lockState = CursorLockMode.Locked;  // блокировка курсора
     }
 
     void Update()
@@ -43,5 +47,26 @@ public class PlayerScript : MonoBehaviour
 
         // ---------------------------------------------
 
+        // ------------- Анимация персонажа ------------
+
+        if (Input.GetKey(KeyCode.W))
+            anim.SetInteger("State", 1);
+
+        else if (Input.GetKey(KeyCode.S))
+            anim.SetInteger("State", 2);
+
+        else if (Input.GetKey(KeyCode.D))
+            anim.SetInteger("State", 4);
+
+        else if (Input.GetKey(KeyCode.A))
+            anim.SetInteger("State", 5);
+
+        else if (Input.GetKey(KeyCode.W) && bonus)
+            anim.SetInteger("State", 3);
+
+        else
+            anim.SetInteger("State", 0);
+
+        // ---------------------------------------------
     }
 }
