@@ -1,23 +1,32 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerScript : MonoBehaviour
 {
+    [Header("ѕодключаемые объекты")]
+    public Transform cameraTransform;  // позици€ камеры
+    public Animator anim;  // подключение аниматора
+    public TextMeshPro txtHealth;  // объект дл€ вывода здоровь€
+    public GameObject pageOnOff;  // активаци€ записки
+    public GameObject hintE;  // всплывающа€ подсказа о взаимодействии
+    private Rigidbody rb;  // определение физического тела
+
+    [Header("–едактируемые параметры")]
     public float speed = 2.5f; // скорость персонажа
     public float mouseSensitivity = 100f; // чувствительность мыши
+    public int health = 100;  //количество здоровь€
 
-    public Transform cameraTransform;  // позици€ камеры
-
-    private Rigidbody rb;  // определение физического тела
     private float xRotation = 0f;  // поворот камеры вверх/вниз
 
-    public Animator anim;  // подключение аниматора
-
-    bool bonus = false;
+    bool bonus = false;  // активаци€ бонуса
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();  // получение данных физического тела
         Cursor.lockState = CursorLockMode.Locked;  // блокировка курсора
+
+        txtHealth.text = "HP: " + health;
     }
 
     void Update()
@@ -41,7 +50,7 @@ public class PlayerScript : MonoBehaviour
         float moveZ = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
-        Vector3 newPosition = rb.position + move * speed * Time.fixedDeltaTime;
+        Vector3 newPosition = rb.position + move.normalized * speed * Time.fixedDeltaTime;
 
         rb.MovePosition(newPosition);
 
@@ -69,4 +78,13 @@ public class PlayerScript : MonoBehaviour
 
         // ---------------------------------------------
     }
+
+    // функци€ дл€ нанесени€ урона, активируема€ из других классов
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        txtHealth.text = health.ToString("HP: " + health);
+    }
+
 }
