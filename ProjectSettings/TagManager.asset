@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - TriggerWall
+  - TriggerElements
+  - End
+  - Tree
   layers:
   - Default
   - TransparentFX
